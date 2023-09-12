@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: my-fastapi-app
+spec:
+  replicas: 1  # You can adjust the number of replicas as needed
+  selector:
+    matchLabels:
+      app: my-fastapi-app  # This label should match the selector in your Service
+  template:
+    metadata:
+      labels:
+        app: my-fastapi-app  # Label to match the selector
+    spec:
+      containers:
+        - name: my-fastapi-app
+          image: my-fastapi-app  # Replace with the name of your FastAPI Docker image
+          ports:
+            - containerPort: 80  # Port your FastAPI application is listening on
+          env:
+            - name: MONGO_URI
+              value: "mongodb://mongo-service:27017/mydb"  # Replace with your MongoDB connection details

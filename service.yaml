@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: my-fastapi-service
+spec:
+  selector:
+    app: my-fastapi-app  # This should match the label in your Deployment
+  ports:
+    - protocol: TCP
+      port: 80  # Port inside the Kubernetes cluster
+      targetPort: 80  # Port your FastAPI application is listening on
+  type: NodePort  # Type of service (NodePort)
